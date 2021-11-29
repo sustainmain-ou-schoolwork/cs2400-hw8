@@ -10,9 +10,9 @@
 
 ---
 
-### Name: Enter your name
+### Name: Josh Marusek
 
-### Email: Enter your OU email
+### Email: jm553020@ohio.edu
 
 ---
 
