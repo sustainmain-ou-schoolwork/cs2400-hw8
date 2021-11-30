@@ -183,17 +183,21 @@ string Appointment::stripSpaces(string input) const {
     int rightIndex = input.length() - 1;
 
     // find beginning of string
-    for (size_t i = 0; i < input.length(); i++) {
-        if (!isspace(input.at(i))) {
-            leftIndex = i;
+    for (int i = 0; i <= rightIndex; i++) {
+        if (isspace(input.at(i))) {
+            leftIndex++;
+        }
+        else {
             break;
         }
     }
 
     // find end of string
-    for (int i = (input.length() - 1); i >= 0; i--) {
-        if (!isspace(input.at(i))) {
-            rightIndex = i;
+    for (int i = rightIndex; i >= leftIndex; i--) {
+        if (isspace(input.at(i))) {
+            rightIndex--;
+        }
+        else {
             break;
         }
     }
