@@ -5,13 +5,13 @@ using namespace std;
 class Appointment {
     public:
         /** Default constructor
-         * @brief Construct a new Appointment object
+         * @brief Construct a new Appointment object.
          * 
          * Initializes title as "N/A", year as 1, month as 1, day as 1, time as 0, and duration as 1.
          */
         Appointment();
         /**
-         * @brief Construct a new Appointment object from appData
+         * @brief Construct a new Appointment object from appData.
          * 
          * @param appData the string containing all the appointment details, separated by barlines
          */
@@ -159,6 +159,14 @@ class Appointment {
          */
         int standardToMilitary(string time) const;
 
+        /**
+         * Function: getAppointmentString
+         * @brief returns the string with all the appointment data.
+         * 
+         * @return appointment string
+         */
+        string getAppointmentString() const;
+
 
         /**
          *  Function: stripSpaces
@@ -189,7 +197,7 @@ class Appointment {
 
         /**
          * Function: containsInt
-         * @brief Checks if a string contains a valid int
+         * @brief Checks if a string contains a valid int.
          * 
          * @return true if the string contains a valid int
          */

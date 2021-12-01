@@ -87,6 +87,10 @@ string Appointment::getStandardTime() const {
     return militaryToStandard(time);
 }
 
+string Appointment::getAppointmentString() const {
+    return title + "|" + to_string(year) + "|" + to_string(month) + "|" + to_string(day) + "|" + getStandardTime() + "|" + to_string(duration);
+}
+
 
 ///setters
 
