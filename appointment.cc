@@ -31,13 +31,22 @@ Appointment::Appointment(string appData) : Appointment() {
         params[i] = stripSpaces(appData.substr(indices[i], (indices[i + 1] - 1 - indices[i])));
     }
     
-    // set all values according to the parameters
+    // set each value based on its corresponding parameter if the parameter is valid
+    // if the parameter is invalid, retain the default value
     setTitle(params[0]);
-    setYear(stoi(params[1]));
-    setMonth(stoi(params[2]));
-    setDay(stoi(params[3]));
+    if (containsInt(params[1])) {
+        setYear(stoi(params[1]));
+    }
+    if (containsInt(params[2])) {
+        setMonth(stoi(params[2]));
+    }
+    if (containsInt(params[3])) {
+        setDay(stoi(params[3]));
+    }
     setTime(standardToMilitary(params[4]));
-    setDuration(stoi(params[5]));
+    if (containsInt(params[5])) {
+        setDuration(stoi(params[5]));
+    }
 }
 
 
@@ -164,15 +173,25 @@ int Appointment::standardToMilitary(string time) const {
         }
     }
 
-    int hour = stoi(time.substr(0, colonIndex));
-    int minute = stoi(time.substr((colonIndex + 1), 2));
-    string meridiem = stringToUpper(time.substr(meridiemIndex, 2));
+    int hour, minute = 0;  // default values
 
-    if (meridiem == "PM" && hour < 12) {       // handle 12-hour wraparound
-        hour += 12;
-    }
-    else if(meridiem == "AM" && hour == 12) {  // handle special case for midnight - 1AM
-        hour = 0;
+    string hourString, minuteString;
+    hourString = time.substr(0, colonIndex);
+    minuteString = time.substr((colonIndex + 1), 2);
+
+    // only convert if all parts of the time string were valid
+    if (containsInt(hourString) && containsInt(minuteString) && meridiemIndex > -1) {
+        hour = stoi(hourString);
+        minute = stoi(minuteString);
+
+        string meridiem = stringToUpper(time.substr(meridiemIndex, 2));
+
+        if (meridiem == "PM" && hour < 12) {       // handle 12-hour wraparound
+            hour += 12;
+        }
+        else if(meridiem == "AM" && hour == 12) {  // handle special case for midnight - 1AM
+            hour = 0;
+        }
     }
 
     return ((hour * 100) + minute);
@@ -214,6 +233,16 @@ string Appointment::stringToUpper(string input) const {
     return output;
 }
 
+bool Appointment::containsInt(string input) const {
+    // scan through each character until a digit is found
+    for (size_t i = 0; i < input.length(); i++) {
+        if (isdigit(input[i])) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 /// friends
 

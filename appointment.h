@@ -187,6 +187,14 @@ class Appointment {
          */
         string stringToUpper(string input) const;
 
+        /**
+         * Function: containsInt
+         * @brief Checks if a string contains a valid int
+         * 
+         * @return true if the string contains a valid int
+         */
+        bool containsInt(string input) const;
+
 
         /**
          * Operator: ==
@@ -195,7 +203,6 @@ class Appointment {
          * @param first the first appointment
          * @param second the seocnd appointment
          * @return true if the objects contain all the same values
-         * @return false if the objects do not contain all the same values
          */
         friend bool operator ==(const Appointment &first, const Appointment &second);
     private:
