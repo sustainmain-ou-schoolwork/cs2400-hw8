@@ -22,7 +22,7 @@ int main(int argc, char const *argv[]) {
     string lineIn;                      // holds a line from the appointment file
 
     // read appointments file
-    appointmentFile.open("agenda-2.txt");
+    appointmentFile.open("agenda.txt");
     if (appointmentFile.fail()) {
         cout << "Failed to open file." << endl;
         exit(0);
@@ -38,7 +38,10 @@ int main(int argc, char const *argv[]) {
     for (size_t i = 0; i < appointmentStrings.size(); i++) {
         Appointment newAppointment(appointmentStrings[i]);
 
-        appointments.push_back(newAppointment);
+        // only load if the line contains non-whitespace chars
+        if (!newAppointment.stripSpaces(appointmentStrings[i]).empty()) {
+            appointments.push_back(newAppointment);
+        }
     }
 
     // parse arguments
@@ -66,6 +69,6 @@ int main(int argc, char const *argv[]) {
     else {
         cout << "Missing arguments." << endl;
     }
-    
+
     return 0;
 }// main
