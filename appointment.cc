@@ -173,7 +173,9 @@ int Appointment::standardToMilitary(string time) const {
         }
     }
 
-    int hour, minute = 0;  // default values
+    // set hour and minute to default values
+    int hour = 0;
+    int minute = 0;
 
     string hourString, minuteString;
     hourString = time.substr(0, colonIndex);
