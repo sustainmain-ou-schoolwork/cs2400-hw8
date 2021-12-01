@@ -77,6 +77,21 @@ int main(int argc, char const *argv[]) {
         }
         else if (argFlag == "-dt") {
             // delete all appointments that match the title specified by the next argument
+            if (argc >= 3) {  // check if next argument exists
+                // remove all matches
+                for (size_t i = 0; i < appointments.size(); i++) {
+                    if (appointments[i].getTitle() == argv[2]) {
+                        appointments.erase(appointments.begin() + i);
+                        i--;
+                    }
+                }
+
+                // save appointments to file
+                writeAppointments(appointments);
+            }
+            else {
+                cout << "No title given." << endl;
+            }
         }
         else if (argFlag == "-dm") {
             // delete all appointments that match the starting time specified by the next argument
@@ -102,8 +117,6 @@ int main(int argc, char const *argv[]) {
             else {
                 cout << "No time given." << endl;
             }
-
-            
         }
         else {
             cout << "Invalid arguments." << endl;
