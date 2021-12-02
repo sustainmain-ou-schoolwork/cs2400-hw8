@@ -187,12 +187,12 @@ int Appointment::standardToMilitary(string time) const {
         hourString = time.substr(0, colonIndex);
         minuteString = time.substr((colonIndex + 1), 2);
 
+        string meridiem = stringToUpper(time.substr(meridiemIndex, 2));
+
         // only convert if all parts of the time string were valid
-        if (containsInt(hourString) && containsInt(minuteString) && meridiemIndex > -1) {
+        if (containsInt(hourString) && containsInt(minuteString) && (meridiem == "AM" || meridiem == "PM")) {
             hour = stoi(hourString);
             minute = stoi(minuteString);
-
-            string meridiem = stringToUpper(time.substr(meridiemIndex, 2));
 
             if (meridiem == "PM" && hour < 12) {       // handle 12-hour wraparound
                 hour += 12;
