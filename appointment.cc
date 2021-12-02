@@ -240,14 +240,17 @@ string Appointment::stringToUpper(string input) const {
 }
 
 bool Appointment::containsInt(string input) const {
-    // scan through each character until a digit is found
+    // scan through each char of the string
     for (size_t i = 0; i < input.length(); i++) {
-        if (isdigit(input[i])) {
+        if (isdigit(input[i])) {       // if the current char is a digit, the string contains an int
             return true;
+        }
+        else if(!isspace(input[i])) {  // if the current char isn't a digit or a space, the string doesn't contain an int
+            return false;
         }
     }
 
-    return false;
+    return false;  // runs if the function never finds a digit or a non-space character
 }
 
 /// friends
