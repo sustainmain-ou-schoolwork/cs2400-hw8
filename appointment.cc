@@ -23,12 +23,21 @@ Appointment::Appointment(string appData) : Appointment() {
     indices[0] = 0;    // first param starts at index 0
     for (int i = 1; i < 6; i++) {
         indices[i] = appData.find("|", indices[i - 1]) + 1;
+        if (indices[i] == 0) {
+            indices[i] = appData.length() + 1;
+        }
     }
-    indices[7] = appData.length();
+    indices[6] = appData.length() + 1;
 
     // parse appData into an array of parameters
     for (int i = 0; i < 6; i++) {
-        params[i] = stripSpaces(appData.substr(indices[i], (indices[i + 1] - 1 - indices[i])));
+        // only add a param if the current index is within the string bounds
+        if (indices[i] < static_cast<int>(appData.length() + 1)) {
+            params[i] = stripSpaces(appData.substr(indices[i], (indices[i + 1] - 1 - indices[i])));
+        }
+        else {
+            break;
+        }
     }
     
     // set each value based on its corresponding parameter if the parameter is valid
