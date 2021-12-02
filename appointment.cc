@@ -43,17 +43,17 @@ Appointment::Appointment(string appData) : Appointment() {
     // set each value based on its corresponding parameter if the parameter is valid
     // if the parameter is invalid, retain the default value
     setTitle(params[0]);
-    if (containsInt(params[1])) {
+    if (isInt(params[1])) {
         setYear(stoi(params[1]));
     }
-    if (containsInt(params[2])) {
+    if (isInt(params[2])) {
         setMonth(stoi(params[2]));
     }
-    if (containsInt(params[3])) {
+    if (isInt(params[3])) {
         setDay(stoi(params[3]));
     }
     setTime(standardToMilitary(params[4]));
-    if (containsInt(params[5])) {
+    if (isInt(params[5])) {
         setDuration(stoi(params[5]));
     }
 }
@@ -199,7 +199,7 @@ int Appointment::standardToMilitary(string time) const {
         string meridiem = stringToUpper(time.substr(meridiemIndex, 2));
 
         // only convert if all parts of the time string were valid
-        if (containsInt(hourString) && containsInt(minuteString) && (meridiem == "AM" || meridiem == "PM")) {
+        if (isInt(hourString) && isInt(minuteString) && (meridiem == "AM" || meridiem == "PM")) {
             hour = stoi(hourString);
             minute = stoi(minuteString);
 
@@ -252,7 +252,7 @@ string Appointment::stringToUpper(string input) const {
     return output;
 }
 
-bool Appointment::containsInt(string input) const {
+bool Appointment::isInt(string input) const {
     // scan through each char of the string
     for (size_t i = 0; i < input.length(); i++) {
         if (isdigit(input[i])) {       // if the current char is a digit, the string contains an int

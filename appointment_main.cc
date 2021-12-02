@@ -14,12 +14,12 @@
 using namespace std;
 
 /**
- * Function: containsInt
+ * Function: isInt
  * @brief Checks if a string contains a valid int.
  * 
  * @return true if the string contains a valid int
  */
-bool containsInt(string input);
+bool isInt(string input);
 
 /**
  * Function: writeAppointments
@@ -96,7 +96,7 @@ int main(int argc, char const *argv[]) {
         else if (argFlag == "-dm") {
             // delete all appointments that match the starting time specified by the next argument
             if (argc >= 3) {  // check if next argument exists
-                if (containsInt(argv[2])) {  // check if next argument contains an int
+                if (isInt(argv[2])) {  // check if next argument contains an int
                     int time = stoi(argv[2]);
 
                     // remove all matches
@@ -129,7 +129,7 @@ int main(int argc, char const *argv[]) {
     return 0;
 }// main
 
-bool containsInt(string input) {
+bool isInt(string input) {
     // scan through each character until a digit is found
     for (size_t i = 0; i < input.length(); i++) {
         if (isdigit(input[i])) {

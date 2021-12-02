@@ -196,12 +196,12 @@ class Appointment {
         string stringToUpper(string input) const;
 
         /**
-         * Function: containsInt
+         * Function: isInt
          * @brief Checks if a string contains a valid int.
          * 
          * @return true if the string contains a valid int
          */
-        bool containsInt(string input) const;
+        bool isInt(string input) const;
 
 
         /**
