@@ -74,6 +74,13 @@ int main(int argc, char const *argv[]) {
         }
         else if (argFlag == "-a") {
             // add an appointment using the appointment data string specified by the next argument
+            if (argc >= 3) {  // check if next argument exists
+                Appointment newAppointment(argv[2]);
+                appointments.push_back(newAppointment);
+            }
+
+            // save appointments to file
+            writeAppointments(appointments);
         }
         else if (argFlag == "-dt") {
             // delete all appointments that match the title specified by the next argument
