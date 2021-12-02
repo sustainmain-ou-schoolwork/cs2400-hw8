@@ -66,11 +66,41 @@ int main(int argc, char const *argv[]) {
     if (argc >= 2) {
         string argFlag = argv[1];
         if (argFlag == "-ps") {
-           // print daily schedule sorted by starting time
-           
+            // print daily schedule sorted by starting time
+            size_t originalSize = appointments.size();
+            for (size_t i = 0; i < originalSize; i++) {
+                int minIndex = 0;
+                int min = appointments[minIndex].getTime();
+                for (size_t j = 0; j < appointments.size(); j++) {
+                    if (appointments[j].getTime() < min) {
+                        minIndex = j;
+                        min = appointments[minIndex].getTime();
+                    }
+                }
+                cout << appointments[minIndex].getAppointmentString() << endl;
+                appointments.erase(appointments.begin() + minIndex);
+            }
         }
         else if (argFlag == "-p") {
             // print all appointments at the time specified by the next argument
+            if (argc >= 3) {  // check if next argument exists
+                if (isInt(argv[2])) {  // check if next argument contains an int
+                    int time = stoi(argv[2]);
+
+                    // print all matches
+                    for (size_t i = 0; i < appointments.size(); i++) {
+                        if (appointments[i].getTime() == time) {
+                            cout << appointments[i].getAppointmentString() << endl;
+                        }
+                    }
+                }
+                else {
+                    cout << "Invalid time." << endl;
+                }
+            }
+            else {
+                cout << "No time given." << endl;
+            }
         }
         else if (argFlag == "-a") {
             // add an appointment using the appointment data string specified by the next argument
